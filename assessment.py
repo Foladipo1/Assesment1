@@ -34,8 +34,13 @@ test_response = requests.get(test_url, headers=headers)
 if test_response.status_code == 200:
     mock_routes = test_response.json()
     accessible_routes = filter_accessible_routes(mock_routes)
-    print("Accessible routes:", accessible_routes)
     sorted_routes = insertion_sort(accessible_routes)
     print("Sorted Accessible Routes:", sorted_routes)
 
 
+
+submit_url = "https://hackdiversity.xyz/api/test/submit-sorted-routes"
+submission = {"routes": sorted_routes}
+submit_response = requests.post(submit_url, json=submission, headers=headers)
+if submit_response.status_code == 200:
+    print("Test Submission Success:", submit_response.json())
