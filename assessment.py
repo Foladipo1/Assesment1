@@ -28,3 +28,14 @@ def insertion_sort(routes):
         routes[j + 1] = key
     return routes
 
+test_url = "https://hackdiversity.xyz/api/test/mockRoutes"
+test_response = requests.get(test_url, headers=headers)
+
+if test_response.status_code == 200:
+    mock_routes = test_response.json()
+    accessible_routes = filter_accessible_routes(mock_routes)
+    print("Accessible routes:", accessible_routes)
+    sorted_routes = insertion_sort(accessible_routes)
+    print("Sorted Accessible Routes:", sorted_routes)
+
+
